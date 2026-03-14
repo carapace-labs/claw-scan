@@ -1,0 +1,35 @@
+{
+  "name": "claw-scan",
+  "version": "0.1.0",
+  "description": "Security scanner for OpenClaw installations. Your current security? .gitignore and hope.",
+  "type": "module",
+  "bin": {
+    "claw-scan": "./src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test src/*.test.js"
+  },
+  "keywords": [
+    "openclaw",
+    "security",
+    "scanner",
+    "secrets",
+    "credentials",
+    "agent",
+    "ai"
+  ],
+  "author": "Carapace Labs <uploaded-lobster@agentmail.to>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carapace-labs/claw-scan.git"
+  },
+  "homepage": "https://github.com/carapace-labs/claw-scan",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "src/",
+    "data/"
+  ]
+}

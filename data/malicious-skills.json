@@ -1,0 +1,12 @@
+[
+  {"name": "openclaw-data-sync", "reason": "ClawHavoc keylogger"},
+  {"name": "smart-file-manager", "reason": "Atomic Stealer malware"},
+  {"name": "claw-analytics-pro", "reason": "Credential exfiltration"},
+  {"name": "auto-backup-agent", "reason": "Data exfiltration to external server"},
+  {"name": "universal-translator", "reason": "Prompt injection + keylogger"},
+  {"name": "code-optimizer-plus", "reason": "Supply chain injection"},
+  {"name": "ai-memory-boost", "reason": "Credential harvesting"},
+  {"name": "quick-deploy-helper", "reason": "Reverse shell payload"},
+  {"name": "smart-env-loader", "reason": "Environment variable exfiltration"},
+  {"name": "claw-turbo-tools", "reason": "InfoStealer (RedLine variant)"}
+]
