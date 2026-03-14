@@ -17,11 +17,18 @@ const SECRET_PATTERNS = [
 
 // Known malicious skills from ClawHavoc campaign and Snyk/Koi research
 let MALICIOUS_SKILLS = [];
+let MALICIOUS_PREFIXES = [];
 try {
   const dataPath = new URL("../data/malicious-skills.json", import.meta.url);
   MALICIOUS_SKILLS = JSON.parse(readFileSync(dataPath, "utf8"));
 } catch {
   // Blocklist not available, skip that check
+}
+try {
+  const prefixPath = new URL("../data/malicious-prefixes.json", import.meta.url);
+  MALICIOUS_PREFIXES = JSON.parse(readFileSync(prefixPath, "utf8"));
+} catch {
+  // Prefix list not available, skip
 }
 
 export function scan(openclawDir) {
@@ -280,7 +287,7 @@ function checkToolDenyList(dir, findings, passed) {
 }
 
 function checkMaliciousSkills(dir, findings, passed) {
-  if (MALICIOUS_SKILLS.length === 0) {
+  if (MALICIOUS_SKILLS.length === 0 && MALICIOUS_PREFIXES.length === 0) {
     // No blocklist available
     return;
   }
@@ -288,19 +295,34 @@ function checkMaliciousSkills(dir, findings, passed) {
   const config = loadConfig(dir);
   const installs = config?.plugins?.installs || {};
   const installed = Object.keys(installs);
-  const malicious = installed.filter((name) =>
-    MALICIOUS_SKILLS.some((m) => name.includes(m.name) || m.name.includes(name))
+
+  const exactMatches = installed.filter((name) =>
+    MALICIOUS_SKILLS.some((m) => name === m.name)
   );
 
+  const prefixMatches = installed.filter((name) =>
+    !exactMatches.includes(name) &&
+    MALICIOUS_PREFIXES.some((p) => name.startsWith(p.prefix))
+  );
+
+  const malicious = [...exactMatches, ...prefixMatches];
+
   if (malicious.length > 0) {
+    const details = malicious.map((name) => {
+      const exact = MALICIOUS_SKILLS.find((m) => m.name === name);
+      if (exact) return `${name} (${exact.reason})`;
+      const prefix = MALICIOUS_PREFIXES.find((p) => name.startsWith(p.prefix));
+      return `${name} (${prefix?.reason || "pattern match"})`;
+    });
+
     findings.push({
       severity: "CRITICAL",
       title: `${malicious.length} known malicious skill(s) installed`,
-      detail: malicious.join(", "),
+      detail: details.join(", "),
       fix: malicious.map((m) => `openclaw plugin uninstall ${m}`).join(" && "),
     });
   } else {
-    passed.push("No known malicious skills detected");
+    passed.push(`No known malicious skills detected (checked ${MALICIOUS_SKILLS.length} names + ${MALICIOUS_PREFIXES.length} patterns)`);
   }
 }
 

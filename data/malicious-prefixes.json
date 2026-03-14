@@ -1,0 +1,17 @@
+[
+  {"prefix": "clawhub", "reason": "ClawHub typosquat cluster (28+ variants)", "source": "Snyk/Koi"},
+  {"prefix": "solana-", "reason": "Crypto lure AMOS cluster (33+ variants)", "source": "Koi"},
+  {"prefix": "phantom-", "reason": "Crypto wallet lure cluster (28+ variants)", "source": "Koi"},
+  {"prefix": "wallet-tracker-", "reason": "Crypto tracker lure cluster (25+ variants)", "source": "Koi"},
+  {"prefix": "insider-wallets-finder-", "reason": "Crypto finder lure cluster (23+ variants)", "source": "Koi"},
+  {"prefix": "polymarket-", "reason": "Prediction market lure cluster (34+ variants)", "source": "Koi"},
+  {"prefix": "yahoo-finance-", "reason": "Finance lure cluster (24+ variants)", "source": "Koi"},
+  {"prefix": "ethereum-gas-tracker-", "reason": "Crypto gas tracker cluster (15+ variants)", "source": "Koi"},
+  {"prefix": "youtube-summarize-", "reason": "YouTube lure cluster (29+ variants)", "source": "Koi"},
+  {"prefix": "youtube-thumbnail-grabber-", "reason": "YouTube lure cluster (13+ variants)", "source": "Koi"},
+  {"prefix": "youtube-video-downloader-", "reason": "YouTube lure cluster (13+ variants)", "source": "Koi"},
+  {"prefix": "x-trends-", "reason": "Social media lure cluster (25+ variants)", "source": "Koi"},
+  {"prefix": "google-workspace-", "reason": "Google impersonation cluster (17+ variants)", "source": "ClawTank"},
+  {"prefix": "auto-updater-", "reason": "Fake updater cluster (28+ variants)", "source": "Koi"},
+  {"prefix": "lost-bitcoin-", "reason": "Crypto recovery scam cluster", "source": "Koi"}
+]
